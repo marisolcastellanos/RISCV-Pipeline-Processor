@@ -1,22 +1,27 @@
 //IF stage 
 module ifetch (
-   input logic          clk,reset,
-   input  logic         PCSrcE,
-   input  logic  [31:0] PCTargetE,
-   output logic  [31:0] InstrD,
-   output logic  [31:0] PCD,PCPlus4D   
+   input  logic          clk,reset,
+   input  logic          PCSrcE,
+   input  logic  [31:0]  PCTargetE,
+   output logic  [31:0]  InstrD,
+   output logic  [31:0]  PCD,PCPlus4D   
    );
 
 //signals
-   logic [31:0] PCNext;
+   logic [31:0] PCNext,PCF;
    logic [31:0] InstrF, PCPlus4F;
+   
+   initial begin 
+      PCPlus4F ,+ 0; 
+   end
 
    //instantiations
-   mux2 #(32)  pcmux(PCPlus4F, PCTargetE, PCSrcE, PCNext); //PCNext is equivalent to PCF
+   mux2 #(32)  pcmux(PCPlus4F, PCTargetE, PCSrcE, PCNext); //PCNext is equivalent to PCF in the diagram
 
    // next PC logic
   flopr #(32) pcreg(clk, reset, PCNext, PCF); 
   adder       pcadd4(PCF, 32'd4, PCPlus4F);
+   
    // Fetch next Instruction 
   imem imem1(PCF, InstrF);
   
