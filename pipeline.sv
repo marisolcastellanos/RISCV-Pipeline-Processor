@@ -11,7 +11,7 @@ module pipeline ();
   // initialize test
   initial
     begin
-      reset <= 1; # 22; reset <= 0;
+      reset <= 1; # 5; reset <= 0;
     end
 
   // generate clock to sequence tests
@@ -24,16 +24,16 @@ module pipeline ();
 
 //~~~~~~~~~~~~~~~~~iFetch Module~~~~~~~~~~~~~~~~~~~~~~
 
-  logic [31:0] tb_Instr, tb_PC;
+  logic [31:0] tb_InstrD, tb_PCD, tb_PCPlus4D;
   logic tb_PCSrcE;
-  logic [31:0] tb_PCF, tb_PCPlus4F;
+  logic [31:0] tb_PCTargetE;
 
 
-  ifetch ifetch1( PCSrcE,PCPlus4F,PCTargetE,InstrD,PCD,PCPlus4D); 
+  ifetch ifetch1(clk, reset,tb_PCSrcE,tb_PCTargetE,tb_InstrD,tb_PCD,tb_PCPlus4D); 
 
    initial begin      
-    PCSrcE <= 0;    
-    PCTargetE <= 0;      
+    tb_PCSrcE <= 0;    
+    tb_PCTargetE <= 0;      
    end                    
 
 
