@@ -1,12 +1,12 @@
 module if_id (
   
-   input  logic             clk, reset,
-   input logic [31:0]    InstrF,        // Input of IF/ID Instruction Register
+   input  logic           clk, reset,
+   input  logic [31:0]    InstrF,        // Input of IF/ID Instruction Register
                           PCF,         // Input of IF/ID NPC Register
-						 PCPlus4F,   // Input of IF/ID for Jump target address
-   output logic [31:0] InstrD,       // Output of IF/ID Instruction Register
-                       PCD,        // Output of IF/ID NPC Register
-					   PCPlus4D     // Output of IF/ID for Jump target address
+			  PCPlus4F,   // Input of IF/ID for Jump target address
+   output logic [31:0]    InstrD,       // Output of IF/ID Instruction Register
+                          PCD,        // Output of IF/ID NPC Register
+			  PCPlus4D     // Output of IF/ID for Jump target address
    );
   
   always_ff @(posedge clk, posedge reset)
